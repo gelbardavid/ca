@@ -1,4 +1,4 @@
-.car-details {
+.book-details {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -6,15 +6,16 @@
     padding-bottom: 15vh;
 }
 
-.car-details h1 {
+.book-details h1 {
     color: var(--clr1);
     font-size: 2em;
 }
 
-.car-details h5 {
+.book-details h5 {
     color: var(--clr2);
 }
-.car-details img {
+
+.book-details img {
     max-width: 200px;
     display: block;
     margin: auto;
