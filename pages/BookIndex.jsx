@@ -28,7 +28,7 @@ export function BookIndex() {
             const { title, listPrice } = book;
             const { amount = 0 } = listPrice || {};
             const isShowByTitle = (title.toLowerCase()).includes(titleFilter.toLowerCase())
-            const isShowByPrice = amount > priceFilter;
+            const isShowByPrice = amount >= priceFilter;
             return isShowByTitle && isShowByPrice
         })
 
