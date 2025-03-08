@@ -1,0 +1,14 @@
+.home {
+    width: 65vw;
+    margin: 5vh auto;
+}
+
+.home .logo {
+    display: flex;
+    justify-content: center;
+}
+
+.home .logo img {
+    width: 15%;
+    margin-bottom: 5vh;
+}
