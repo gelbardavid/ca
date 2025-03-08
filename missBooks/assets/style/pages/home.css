@@ -1,7 +1,6 @@
 .home {
-    width: 50vw;
+    width: 65vw;
     margin: 5vh auto;
-    border: 1px solid black;
 }
 
 .home .logo {
@@ -10,6 +9,6 @@
 }
 
 .home .logo img {
-    width: 20%;
-    margin-bottom: 10vh;
+    width: 15%;
+    margin-bottom: 5vh;
 }

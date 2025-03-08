@@ -4,7 +4,10 @@ const { Routes, Route, Navigate } = ReactRouterDOM
 import { HomePage } from "./pages/HomePage.jsx"
 import { AppHeader } from "./cmps/AppHeader.jsx"
 import { About } from "./pages/About.jsx"
-import { BookIndex } from "./pages/BookIndex.jsx"
+import { BookDetails } from "./pages/BookDetails.jsx"
+import { NotFound } from "./cmps/NotFound.jsx"
+
+import { ROUTES } from './services/constants.js'
 
 export function App() {
 
@@ -13,11 +16,11 @@ export function App() {
             <section className="app">
                 <AppHeader />
                 <Routes>
-                    <Route path="/" element={<Navigate to="/home" />}></Route>
-                    <Route path="/home" element={<HomePage />}></Route>
-                    <Route path="/about" element={<About />}></Route>
-                    <Route path="/book" element={<BookIndex />}></Route>
-                    <Route path="/book/:bookId" element={<BookIndex />}></Route>
+                    <Route path={ROUTES.ROOT} element={<Navigate to={ROUTES.HOME} />}></Route>
+                    <Route path={ROUTES.HOME} element={<HomePage />}></Route>
+                    <Route path={ROUTES.ABOUT} element={<About />}></Route>
+                    <Route path={ROUTES.BOOK_DETAILS} element={<BookDetails />}></Route>
+                    <Route path={ROUTES.NOT_FOUNT} element={<NotFound />}></Route>
                 </Routes>
             </section>
         </Router >

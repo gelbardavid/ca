@@ -1,4 +1,4 @@
-import { loadFromStorage, makeId, saveToStorage, makeLorem } from './util.service.js'
+import { loadFromStorage, makeId, saveToStorage, makeLorem, getRandomNumber } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 const BOOK_KEY = 'bookDB'
@@ -11,6 +11,7 @@ export const bookService = {
     save,
     getEmptybook,
     getDefaultFilter,
+    getBooksMaxPrice,
 }
 
 function query(filterBy = {}) {
@@ -44,12 +45,19 @@ function save(book) {
     }
 }
 
-function getEmptybook(title = '', description = '', thumbnail = '../assets/img/21.png', price = 1, currency = "EUR", isOnSale = false) {
-    const defaultListPrice = {
-        amount: price,
-        currencyCode: currency,
-        isOnSale
-    }
+function getEmptybook({
+    title = '',
+    description = '',
+    thumbnail = '../assets/img/21.png',
+    price = 1,
+    currency = "EUR",
+    isOnSale = false,
+    authors = ["NA"],
+    publishedDate = 'NA',
+    pageCount = 0,
+    categories = ["NA"],
+    language = 'en'
+}) {
     return {
         title,
         description,
@@ -58,7 +66,13 @@ function getEmptybook(title = '', description = '', thumbnail = '../assets/img/2
             amount: price,
             currencyCode: currency,
             isOnSale
-        }
+        },
+        subtitle: makeLorem(5),
+        authors,
+        publishedDate,
+        pageCount,
+        categories,
+        language
     };
 }
 
@@ -83,17 +97,31 @@ function _createBooks() {
     let books = loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
         books = [
-            _createbook('Dragon Cover', makeLorem(50), '../assets/img/21.png', 20.99, "EUR", false),
-            _createbook('Dubi Dubi', makeLorem(75), '../assets/img/21 (15).png', 15.99, "EUR", true),
-            _createbook('Bati Bat', makeLorem(63), '../assets/img/21 (19).png', 28.99, "EUR", true),
-            _createbook('Scienceeee', makeLorem(100), '../assets/img/21 (6).png', 80.99, "EUR", false),
+            _createbook('Dragon Cover', makeLorem(50), '../assets/img/33.jpg', 20.99, "EUR", false, ["Me Myself", "My Colleague"], 2015, "en", getRandomNumber(3)),
+            _createbook('Dubi Dubi', makeLorem(75), '../assets/img/35.jpg', 15.99, "EUR", true, ["Me Myself"], 1953, "en", getRandomNumber(3)),
+            _createbook('Bati Bat', makeLorem(63), '../assets/img/39.jpg', 28.99, "EUR", true, ["Me Myself"], 1945, "en", getRandomNumber(3)),
+            _createbook('Scienceeee', makeLorem(100), '../assets/img/37.jpg', 80.99, "EUR", false, ["Me Myself"], 1991, "en", getRandomNumber(3)),
+            _createbook('Kiddiiii', makeLorem(10), '../assets/img/34.jpg', 80.99, "EUR", false, ["Me Myself"], 1993, "en", getRandomNumber(3)),
+            _createbook('Alchemists', makeLorem(100), '../assets/img/29.jpg', 80.99, "EUR", false, ["Me Myself"], 1989, "en", getRandomNumber(3)),
+            _createbook('GoDz', makeLorem(100), '../assets/img/40.jpg', 80.99, "EUR", false, ["Me Myself"], 2000, "en", getRandomNumber(3)),
+            _createbook('Learneee', makeLorem(100), '../assets/img/36.jpg', 189.99, "EUR", false, ["Me Myself"], 2025, "en", getRandomNumber(3)),
+            _createbook('COSMOS Unrevealed', makeLorem(150), '../assets/img/32.jpg', 80.99, "EUR", false, ["Me Myself"], 2008, "en", getRandomNumber(3)),
+            _createbook('Molucules', makeLorem(130), '../assets/img/23.jpg', 80.99, "EUR", false, ["Me Myself"], 2014, "en", getRandomNumber(3)),
         ]
         saveToStorage(BOOK_KEY, books)
     }
 }
 
-function _createbook(title, description, thumbnail, price, currency, isOnSale) {
-    const book = getEmptybook(title, description, thumbnail, price, currency, isOnSale)
+function _createbook(title, description, thumbnail, price, currency, isOnSale, authors, publishedDate, language, pageCount, categories) {
+    const book = getEmptybook({ title, description, thumbnail, price, currency, isOnSale, authors, publishedDate, language, pageCount, categories })
     book.id = makeId()
     return book
+}
+
+function getBooksMaxPrice(books) {
+    return books.reduce((highestPrice, currentBook) => {
+        const { listPrice } = currentBook;
+        const { amount = 0 } = listPrice || {}
+        return amount > highestPrice ? amount : highestPrice;
+    }, 0)
 }
