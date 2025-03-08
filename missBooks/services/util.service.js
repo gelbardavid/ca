@@ -1,3 +1,4 @@
+import { DESCENT, LIGHT, SERIOUS, READER_TYPE_NAMES, ERAS, NEW, VINTAGE, EXPENSIVE, PRICE_CLASSES, CHEAP } from './constants.js';
 
 export function makeId(length = 6) {
     var txt = ''
@@ -33,4 +34,48 @@ export function saveToStorage(key, value) {
 export function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
+}
+
+export function getRandomNumber(digitsCount) {
+    const multiplier = Math.pow(10, digitsCount)
+    console.log(multiplier)
+    return Math.ceil(Math.random() * multiplier)
+}
+
+export function getReaderLevel(pagesCount) {
+    if (!pagesCount) return READER_TYPE_NAMES.NA
+
+    const levels = {
+        [SERIOUS]: () => pagesCount >= 500,
+        [DESCENT]: () => pagesCount >= 200 && pagesCount < 500,
+        [LIGHT]: () => pagesCount < 200,
+    }
+
+    const readerType = Object.keys(levels).find(level => levels[level]());
+    return READER_TYPE_NAMES[readerType];
+}
+
+export function getBookEra(publishedDate) {
+    if (!publishedDate) return ERAS.NA;
+
+    const eras = {
+        [VINTAGE]: () => new Date().getFullYear() - Number(publishedDate) > 10,
+        [NEW]: () => new Date().getFullYear() - Number(publishedDate) <= 10
+    }
+
+    const era = Object.keys(eras).find(era => eras[era]());
+    return ERAS[era];
+}
+
+export const getPriceColor = (price) => {
+    if (!price) return PRICE_CLASSES[DESCENT];
+
+    const priceTags = {
+        [EXPENSIVE]: () => price >= 150,
+        [CHEAP]: () => price < 20,
+    }
+
+    const priceTagName = Object.keys(priceTags).find(priceTag => priceTags[priceTag]());
+
+    return PRICE_CLASSES[priceTagName] || PRICE_CLASSES[DESCENT];
 }

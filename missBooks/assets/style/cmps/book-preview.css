@@ -1,0 +1,58 @@
+.book-preview {
+    text-align: center;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.book-preview h4 {
+    text-transform: capitalize;
+    color: black;
+}
+
+.book-preview h2 {
+    margin-top: 3vh;
+}
+
+.book-preview p {
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    font-size: 0.9rem;
+    height: 12vh;
+}
+
+.book-preview li {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--clr1bg);
+    border: 2px solid var(--clr2);
+    padding: 1rem;
+    max-height: 430px;
+    overflow-y: hidden;
+}
+
+.book-preview-description {
+    height: 20px;
+}
+
+
+
+@media (max-width: 1200px) {
+    h2 {
+        font-size: 1.25vw;
+    }
+}
+
+@media (max-width: 2000px) {
+    h2 {
+        font-size: 1.5vw;
+    }
+}

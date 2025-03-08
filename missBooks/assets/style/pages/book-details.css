@@ -1,0 +1,110 @@
+.book-details {
+    /* display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-bottom: 15vh; */
+    width: 65vw;
+    margin: 5vh auto;
+}
+
+.book-details h1 {
+    color: var(--clr1);
+    font-size: 2em;
+}
+
+.book-details h5 {
+    color: var(--clr2);
+    font-size: 0.85em;
+}
+
+.book-data {
+    display: flex;
+    flex-direction: row;
+    height: 40vh;
+}
+
+.book-image {
+    width: 40vw;
+    height: 40vh;
+    max-width: 300px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-image img {
+    width: 300px;
+    height: 400px;
+    max-width: 300px;
+    flex: 1;
+}
+
+.book-image h1 {
+    flex: 1;
+}
+
+.book-data-description {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.book-metadata {
+    display: flex;
+}
+
+.book-metadata p {
+    margin: auto 10px;
+    font-family: sans-serif;
+    font-size: .8em;
+    font-weight: bold;
+}
+
+.book-details .subtitle {
+    font-size: 0.9em;
+    margin: 5px 0;
+    font-style: italic;
+}
+
+.book-details .description {
+    margin: 5px 0;
+    overflow: hidden;
+}
+
+.book-price-value {
+    font-family: sans-serif;
+    color: black;
+}
+
+.extended-metadata {
+    display: flex;
+    gap: 15px;
+}
+
+.expensive-book {
+    color: red !important;
+}
+
+.cheap-book {
+    color: green !important;
+}
+
+.descent-price-book {
+    color: black !important;
+}
+
+.book-on-sale {
+    height: 20px;
+    width: 300px;
+    max-width: 300px;
+    align-items: center;
+    text-align: center;
+    font-family: 'Edu VIC WA NT Beginner', cursive;
+    font-weight: bold;
+    font-size: 0.7em;
+    background-color: red;
+    color: white;
+}

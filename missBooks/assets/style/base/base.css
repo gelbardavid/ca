@@ -43,3 +43,7 @@ object {
 .debug * {
     outline: 1px solid red
 }
+
+ul {
+    padding: 0;
+}
